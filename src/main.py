@@ -10,7 +10,7 @@ from metrics import total_return, annualized_volatility, max_drawdown, days_to_d
 
 
 def analyze_era(era: Era) -> pd.DataFrame:
-    """Kjører alle metrikker på hver ticker i en æra og returnerer en tabell."""
+    """Run all metrics on each ticker in an era and return a table."""
     era.load_data()
     rows = []
     for ticker in era.tickers:
@@ -37,7 +37,7 @@ def main() -> None:
         "data/dotcom",
     )
 
-    print("=== AI-boom (2022-2026) ===")
+    print("=== AI boom (2022-2026) ===")
     print(analyze_era(ai).to_string(index=False))
     print()
     print("=== Dot-com (1995-2002) ===")
