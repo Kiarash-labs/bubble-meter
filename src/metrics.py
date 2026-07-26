@@ -30,3 +30,15 @@ def days_to_double(prices: pd.Series):
         if prices.iloc[i] >= target:
             return i
     return None
+
+
+def bubble_score(volatility: float, drawdown: float, avg_days_to_double: float) -> float:
+    """Combine volatility, drawdown and doubling speed into a 0-100 bubble score.
+
+    Higher = more bubble-like. Total return is deliberately excluded, since high
+    returns alone do not distinguish a bubble from genuine growth.
+    """
+    vol_score = volatility / 80
+    drawdown_score = abs(drawdown) / 100
+    speed_score = max(0, 1 - (avg_days_to_double / 1000))
+    return round((vol_score + drawdown_score + speed_score) / 3 * 100, 1)
